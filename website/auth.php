@@ -1,5 +1,4 @@
 <?php
-    require_once('base.php');
     try {
         if (isset($_POST['first_name']) && isset($_POST['last_name']) 
         && isset($_POST['email']) && isset($_POST['password']) 
@@ -12,42 +11,38 @@
                 header("Location: auth.php");
                 exit();
             }
-
-            $sql = "INSERT INTO users (first_name, last_name, email, password)";
+            $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(
                 ':first_name' => $_POST['first_name'],
-                ':last_name' => [$_POST['last_name']],
-                ':email' => [$_POST['email']],
-                ':password' => [$_POST['password']]));
-            
+                ':last_name' => $_POST['last_name'],
+                ':email' => $_POST['email'],
+                ':password' => $_POST['password']
+            ));
             $selectionOption = $_POST['members'];
             $userId = $pdo->lastInsertId();
-
             if($selectionOption === 'ST') {
-                $sql = "INSERT INTO student (id)";
+                $sql = "INSERT INTO student (id) VALUES (:id)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(array(
                     ':id' => $userId));
             } elseif($selectionOption === 'IN') {
-                $sql = "INSERT INTO instructor (id)";
+                $sql = "INSERT INTO instructor (id) VALUES (:id)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(array(
                     ':id' => $userId));
             } else {
                 $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
             }
-
             session_start();
             $_SESSION['user_id'] = $userId;
             header("Location: home.php");
             exit();
         }
-
     }  catch( PDOException $err) {
         echo "Exception message: " . $err->getMessage();
             exit();
-    }
+        }
 ?>
 <title>SignUp</title>
 <div class="error-message">
@@ -71,7 +66,7 @@
                     </div>
                     <div class="mb-6">
                         <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                        <input type="text" name="last_name id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="text" name="last_name" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
