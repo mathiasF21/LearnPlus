@@ -12,13 +12,14 @@
                 header("Location: auth.php");
                 exit();
             }
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(
                 ':first_name' => $_POST['first_name'],
                 ':last_name' => $_POST['last_name'],
                 ':email' => $_POST['email'],
-                ':password' => $_POST['password']
+                ':password' => $hashedPassword
             ));
             $selectionOption = $_POST['members'];
             $userId = $pdo->lastInsertId();
@@ -40,22 +41,21 @@
             header("Location: home.php");
             exit();
         }
+        include 'navbar.php' ;
+
     }  catch( PDOException $err) {
         echo "Exception message: " . $err->getMessage();
             exit();
         }
 ?>
 <title>SignUp</title>
-<?php
-    include 'navbar.php' ;
-?>
 <div class="error-message">
   <?php echo isset($_POST['errorMessage']) ? $_POST['errorMessage'] : ''; ?>
 </div>
 <section class="bg-blue-800 my-44">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-8 h-8 mr-2" src="mortarboard.svg" alt="logo">
+            <img class="w-8 h-8 mr-2" src="./svgs/mortarboard.svg" alt="logo">
             <span class="text-white">LearnPlus</span>  
         </a>
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

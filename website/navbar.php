@@ -1,16 +1,23 @@
 <?php
     require_once('base.php');
+    session_start();
 ?>
 <body class="bg-blue-800">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
             <a href="home.php" class="flex items-center">
-                <img src="mortarboard.svg" class="h-8 mr-3" alt="Flowbite Logo" />
+                <img src="./svgs/mortarboard.svg" class="h-8 mr-3" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">LearnPlus</span>
             </a>
             <div class="flex items-center">
                 <a href="#" class="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">(123) 456-7891</a>
-                <a href="login.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+                <?php
+                    if(isset($_SESSION['email'])) {
+                        echo '<a href="logout.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Logout</a>';
+                    } else {
+                        echo '<a href="login.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>';
+                    }
+                ?>
             </div>
         </div>
     </nav>

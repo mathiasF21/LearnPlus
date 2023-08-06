@@ -12,11 +12,11 @@
         structured for easy maintenance and scalability. 
     </p>
     <div class="flex justify-center mt-4 ">
-        <img class="w-20 h-20" src="html-5.svg" alt="HTML5 logo"> 
-        <img class="w-20 h-20" src="php.svg" alt="PHP logo"> 
-        <img class="w-20 h-20" src="tailwind.svg" alt="Tailwind CSS logo"> 
-        <img class="w-20 h-20" src="my_sql.svg" alt="MySQL logo"> 
-        <img class="w-20 h-20" src="js.svg" alt="JavaScript logo"> 
+        <img class="w-20 h-20" src="./svgs/html-5.svg" alt="HTML5 logo"> 
+        <img class="w-20 h-20" src="./svgs/php.svg" alt="PHP logo"> 
+        <img class="w-20 h-20" src="./svgs/tailwind.svg" alt="Tailwind CSS logo"> 
+        <img class="w-20 h-20" src="./svgs/my_sql.svg" alt="MySQL logo"> 
+        <img class="w-20 h-20" src="./svgs/js.svg" alt="JavaScript logo"> 
     </div>
 </div>
 <?php include 'footer.php';?>

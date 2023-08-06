@@ -17,28 +17,28 @@
 <div class="max-w-6xl mx-auto">
     <div class="flex flex-wrap text-center gap-4">
         <div class="border-white border-4 bg-teal-900 h-20 flex-1 h-96 rounded-xl flex flex-col items-center justify-center">
-            <img class="w-20 h-20 mx-auto" src="history.svg" alt="logo"> 
+            <img class="w-20 h-20 mx-auto" src="./svgs/history.svg" alt="logo"> 
             <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">History</h1>
             <div class="space-x-6 mt-4"> 
                 <a href="history.php" class="rounded-md bg-orange-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Learn/Teach History</a>
             </div>      
         </div>  
         <div class="border-white border-4 bg-teal-300 h-20 flex-1 h-96 rounded-xl flex flex-col items-center justify-center"> 
-            <img class="w-20 h-20 mx-auto" src="math.svg" alt="logo"> 
+            <img class="w-20 h-20 mx-auto" src="./svgs/math.svg" alt="logo"> 
             <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Math</h1>
             <div class="space-x-6 mt-4"> 
                 <a href="math.php" class="rounded-md bg-orange-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Learn/Teach Math</a>
             </div>      
         </div>  
         <div class="border-white border-4 bg-cyan-600 h-20 flex-1 h-96 rounded-xl flex flex-col items-center justify-center">
-            <img class="w-20 h-20 mx-auto" src="science.svg" alt="logo"> 
+            <img class="w-20 h-20 mx-auto" src="./svgs/science.svg" alt="logo"> 
             <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Science</h1>
             <div class="space-x-6 mt-4"> 
                 <a href="science.php" class="rounded-md bg-orange-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Learn/Teach Science</a>
             </div>      
         </div>  
         <div class="border-white border-4 bg-indigo-600 h-20 flex-1 h-96 rounded-xl flex flex-col items-center justify-center">
-            <img class="w-20 h-20 mx-auto" src="flag.svg" alt="logo"> 
+            <img class="w-20 h-20 mx-auto" src="./svgs/flag.svg" alt="logo"> 
             <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">English</h1>
             <div class="space-x-6 mt-4"> 
                 <a href="english.php" class="rounded-md bg-orange-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Learn/Teach English</a>
