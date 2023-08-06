@@ -1,5 +1,5 @@
 <?php
-    require_once('base.php');
+    include 'navbar.php' ;
 ?>
 <title>Science</title>
 <div>

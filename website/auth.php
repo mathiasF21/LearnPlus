@@ -1,4 +1,5 @@
 <?php
+    include 'pdo-conn.php';
     try {
         if (isset($_POST['first_name']) && isset($_POST['last_name']) 
         && isset($_POST['email']) && isset($_POST['password']) 
@@ -45,6 +46,9 @@
         }
 ?>
 <title>SignUp</title>
+<?php
+    include 'navbar.php' ;
+?>
 <div class="error-message">
   <?php echo isset($_POST['errorMessage']) ? $_POST['errorMessage'] : ''; ?>
 </div>

@@ -1,5 +1,5 @@
 <?php
-    require_once('base.php');
+    include 'navbar.php' ;
 ?>
 <title>Learn More</title>
 <h1 class="my-5 text-center relative z-10 text-4xl font-bold tracking-tight text-white sm:text-6xl"><span class="underline decoration-red-700">Frequently Asked Questions</span></h1>

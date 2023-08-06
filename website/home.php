@@ -1,5 +1,5 @@
 <?php
-    require_once('base.php');
+    include 'navbar.php';
 ?>
 <title>Home</title>
 <div class="relative h-screen bg-blue-700 bg-cover bg-center" style="background-image: url('./images/learning.jpg');">

@@ -1,5 +1,5 @@
 <?php
-    require_once('base.php');
+    include 'navbar.php' ;
 ?>
 <title>Login</title>
 <section class="bg-blue-800">

@@ -1,5 +1,5 @@
 <?php
-    require_once('base.php');
+    include 'navbar.php' ;
 ?>
 <title>PasswordChange</title>
 <section class="bg-blue-800">
