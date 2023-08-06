@@ -1,0 +1,31 @@
+# Ignore Composer's dependencies directory
+/vendor/
+
+# Ignore Node.js modules directory (if you are using Node.js)
+/node_modules/
+
+# Ignore any log files
+*.log
+
+# Ignore any database configuration files that may contain sensitive information
+/config/db_config.php
+/pdo-conn.php
+
+# Ignore user-specific IDE configuration files
+/.idea/
+/.vscode/
+
+# Ignore any environment-specific configuration files
+.env
+
+# Ignore any cache or temporary files
+/cache/
+/temp/
+/uploads/
+
+# Ignore sensitive data files
+/secrets/
+
+# Ignore build artifacts (optional, only if applicable)
+/build/
+/dist/
