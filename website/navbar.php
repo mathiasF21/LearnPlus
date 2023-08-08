@@ -1,20 +1,6 @@
 <?php
     require_once('base.php');
     session_start();
-
-    if (isset($_SESSION['id'])) {
-        $user_id = $_SESSION['id'];
-
-        $sql = 'SELECT * FROM Instructor WHERE id = :id';
-        
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-        
-        if($stmt->rowCount() > 0) {
-            echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
-        }
-    }
 ?>
 <body class="bg-blue-800">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -51,6 +37,21 @@
                     <li>
                         <a href="./learn_more.php" class="text-white dark:text-white hover:underline">Learn More</a>
                     </li>
+                    <?php                   
+                        if (isset($_SESSION['id'])) {
+                            $user_id = $_SESSION['id'];
+
+                            $sql = 'SELECT * FROM Instructor WHERE id = :id';
+                            
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+                            $stmt->execute();
+                            
+                            if($stmt->rowCount() > 0) {
+                                echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                            }
+                        }
+                    ?>
                 </ul>
             </div>
         </div>

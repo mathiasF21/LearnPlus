@@ -4,7 +4,8 @@
     try {
         if (isset($_POST['course_name']) && isset($_POST['course_desc']) 
         && isset($_POST['max-cap']) && isset($_POST['start-time']) 
-        && isset($_POST['end-time']) && isset($_POST['course_choice'])) {
+        && isset($_POST['end-time']) && isset($_POST['course_choice'])
+        && isset($_POST['cost'])) {
 
             $course_name = htmlspecialchars($_POST['course_name']);
             $max_capacity = (int)$_POST['max-cap'];
@@ -13,6 +14,7 @@
             $category_id = null;
             $start_time = $_POST['start-time'];
             $end_time = $_POST['end-time'];
+            $course_cost = $_POST['cost'];
 
             if ($course_choice === 'SC') {
                 $category_id = 1;
@@ -27,7 +29,7 @@
                 header("Location insertCourse.php");
             }
 
-            $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity)";
+            $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity, cost) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity, :cost)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(
                 ':id_instructor' => $_SESSION['id'],
@@ -36,7 +38,8 @@
                 ':name' => $course_name,
                 ':start_time' => $start_time,
                 ':end_time' => $end_time,
-                ':max_capacity' => $max_capacity
+                ':max_capacity' => $max_capacity,
+                'cost' => $course_cost
             ));
         } 
     } catch(PDOException $err) {
@@ -65,6 +68,10 @@
             <div>
                 <label for="max-cap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maximum capacity:</label>
                 <input type="number" name="max-cap" id="max-cap" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required step="1">
+            </div>
+            <div>
+                <label for="cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course cost:</label>
+                <input type="number" name="cost" id="cost" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required step="1">
             </div>
             <div>
                 <label for="course_choice" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose the subject:</label>
