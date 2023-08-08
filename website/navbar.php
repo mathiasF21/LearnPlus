@@ -1,6 +1,20 @@
 <?php
     require_once('base.php');
     session_start();
+
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+
+        $sql = 'SELECT * FROM Instructor WHERE id = :id';
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0) {
+            echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+        }
+    }
 ?>
 <body class="bg-blue-800">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -12,7 +26,7 @@
             <div class="flex items-center">
                 <a href="#" class="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">(123) 456-7891</a>
                 <?php
-                    if(isset($_SESSION['email'])) {
+                    if(isset($_SESSION['id'])) {
                         echo '<a href="logout.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Logout</a>';
                     } else {
                         echo '<a href="login.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>';

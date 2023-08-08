@@ -14,5 +14,4 @@
         can guide us in building a better world and addressing contemporary challenges effectively.
     </p>
 </div>
-
 <?php include 'footer.php';?>
