@@ -11,7 +11,6 @@
                 $error_message = 'Passwords do not match!';
             } else {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            
                 $sql = "UPDATE users SET password = :password WHERE email = :email";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(['password' => $hashedPassword, 'email' => $email]);
@@ -26,6 +25,7 @@
         }
     }
     catch( PDOException $err) {
+        $pdo->rollBack();
         echo "Exception message: " . $err->getMessage();
             exit();
         }

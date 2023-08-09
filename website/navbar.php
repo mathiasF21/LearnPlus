@@ -41,14 +41,23 @@
                         if (isset($_SESSION['id'])) {
                             $user_id = $_SESSION['id'];
 
-                            $sql = 'SELECT * FROM Instructor WHERE id = :id';
+                            $studentSql = 'SELECT * FROM Student WHERE id = :id';
+                            $instructorSql = 'SELECT * FROM Instructor WHERE id = :id';
                             
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-                            $stmt->execute();
+                            $stmtSt = $pdo->prepare($studentSql);
+                            $stmtSt->bindParam(':id', $user_id, PDO::PARAM_INT);
+                            $stmtSt ->execute();
+
+                            $stmtT = $pdo->prepare($instructorSql);
+                            $stmtT ->bindParam(':id', $user_id, PDO::PARAM_INT);
+                            $stmtT ->execute();
                             
-                            if($stmt->rowCount() > 0) {
+                            if ($stmtT->rowCount() > 0) {
                                 echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                            } elseif ($stmtSt->rowCount() > 0) {
+                                $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
+                                $_SESSION['funds'] = $studentData['funds']; 
+                                echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Enroll in a course</a>';
                             }
                         }
                     ?>

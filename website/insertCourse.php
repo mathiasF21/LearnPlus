@@ -43,6 +43,7 @@
             ));
         } 
     } catch(PDOException $err) {
+        $pdo->rollBack();
         echo "Exception message: " . $err->getMessage();
         exit();
     }

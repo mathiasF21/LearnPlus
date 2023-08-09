@@ -8,7 +8,32 @@
         <h1 class="relative z-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">Empower Your Mind: Learn, Grow, Succeed!</h1>
         <p class="mt-6 text-lg leading-8 text-gray-300">Discover a World of Knowledge: Explore, Learn, and Grow with Our Interactive Learning Platform. Whether you're a curious beginner or a seasoned enthusiast, our diverse range of courses awaits you.</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a href="auth.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">I want to learn/teach</a>
+        <?php
+            if (isset($_SESSION['id'])) {
+                $user_id = $_SESSION['id'];
+
+                $studentSql = 'SELECT * FROM Student WHERE id = :id';
+                $instructorSql = 'SELECT * FROM Instructor WHERE id = :id';
+                
+                $stmtSt = $pdo->prepare($studentSql);
+                $stmtSt->bindParam(':id', $user_id, PDO::PARAM_INT);
+                $stmtSt ->execute();
+
+                $stmtT = $pdo->prepare($instructorSql);
+                $stmtT ->bindParam(':id', $user_id, PDO::PARAM_INT);
+                $stmtT ->execute();
+                
+                if($stmtSt->rowCount() > 0) {
+                    $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['funds'] = $studentData['funds']; 
+                    echo '<a href="enrollCourse.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Enroll in a course</a>';
+                } elseif($stmtT->rowCount() > 0) {
+                    echo '<a href="insertCourse.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create a course</a>';
+                }
+            } else {
+                echo '<a href="auth.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">I want to learn/teach</a>';
+            }
+        ?>
             <a href="learn_more.php" class="text-sm font-semibold hover:underline leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
         </div>
     </div>
