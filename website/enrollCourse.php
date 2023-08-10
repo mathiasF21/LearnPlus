@@ -48,7 +48,7 @@
             exit();
         }
 ?>
-<title>Course conlusion</title>
+<title>Course Conlusion</title>
 <?php if (!empty($error_message)) : ?>
     <div id="alert-border-2" class="flex items-center p-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

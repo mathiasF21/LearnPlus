@@ -49,7 +49,7 @@
             exit();
         }
 ?>
-<title>SignUp</title>
+<title>Sign Up</title>
 <div class="error-message">
   <?php echo isset($_POST['errorMessage']) ? $_POST['errorMessage'] : ''; ?>
 </div>

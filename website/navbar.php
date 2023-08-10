@@ -32,10 +32,10 @@
                         <a href="aboutProject.php" class="text-white dark:text-white hover:underline">About project</a>
                     </li>
                     <li>
-                        <a href="./studentsInfo.php" class="text-white dark:text-white hover:underline">Learners</a>
+                        <a href="./questions.php" class="text-white dark:text-white hover:underline">Q&A</a>
                     </li>
                     <li>
-                        <a href="./learn_more.php" class="text-white dark:text-white hover:underline">Learn More</a>
+                        <a href="./learnMore.php" class="text-white dark:text-white hover:underline">Learn More</a>
                     </li>
                     <?php                   
                         if (isset($_SESSION['id'])) {

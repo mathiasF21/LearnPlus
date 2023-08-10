@@ -34,7 +34,7 @@
                 echo '<a href="auth.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">I want to learn/teach</a>';
             }
         ?>
-            <a href="learn_more.php" class="text-sm font-semibold hover:underline leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
+            <a href="learnMore.php" class="text-sm font-semibold hover:underline leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
     include 'navbar.php' ;
 ?>
-<title>Donors Information</title>
+<title>Questions</title>
 <div>
     <div>
         <div class="flex items-center text-center w-100">

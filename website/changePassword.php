@@ -31,7 +31,7 @@
         }
     include 'navbar.php' ;
 ?>
-<title>PasswordChange</title>
+<title>Password Change</title>
 <section class="bg-blue-800">
 <?php if (!empty($error_message)) : ?>
     <div id="alert-border-2" class="flex items-center p-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">

@@ -59,7 +59,7 @@
                 echo $row['id'];
                 echo '</td>';
                 echo '<td class="px-6 py-4 text-right">';
-                echo '<a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View description</a>';
+                echo '<a href="description.php?course_id=' . $row['id'] . '" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View description</a>';
                 echo '</td></tr>';
             }
             echo '</tbody>';
