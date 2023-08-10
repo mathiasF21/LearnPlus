@@ -48,7 +48,7 @@
             exit();
         }
 ?>
-<title>Enroll in course</title>
+<title>Course conlusion</title>
 <?php if (!empty($error_message)) : ?>
     <div id="alert-border-2" class="flex items-center p-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -68,14 +68,22 @@
 <div class="w-full bg-white mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div class="my-8 space-y-4 md:space-y-6 sm:p-4"> 
         <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Enroll in a course
+            Enroll/Delist a course
         </h1>
         <form class="text-center space-y-4 md:space-y-6" method="post">
             <div class="mb-6">
                 <label for="course_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course ID</label>
                 <input type="number" id="course_id" name="course_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insert course ID" required>
             </div>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enroll in</button>
+            <div>
+                <label for="course_conclusion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course action:</label>
+                    <select id="course_conclusion" name="course_conclusion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Choose one option</option>
+                        <option value="SC">Enroll</option>
+                        <option value="MT">Delist</option>
+                    </select>
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delist/Enroll</button>
         </form>
     </div>
 </div>

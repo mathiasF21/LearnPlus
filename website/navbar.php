@@ -57,7 +57,7 @@
                             } elseif ($stmtSt->rowCount() > 0) {
                                 $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['funds'] = $studentData['funds']; 
-                                echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Enroll in a course</a>';
+                                echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Delist/Enroll</a>';
                             }
                         }
                     ?>
