@@ -38,6 +38,10 @@
             }
             session_start();
             $_SESSION['user_id'] = $userId;
+            $_SESSION['first_name'] = $_POST['first_name'];
+            $_SESSION['last_name'] = $_POST['last_name'];
+            $_SESSION['members'] = $_POST['members'];
+            $_SESSION['email'] = $_POST['email'];
             header("Location: home.php");
             exit();
         }

@@ -13,7 +13,8 @@
                 <a href="#" class="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">(123) 456-7891</a>
                 <?php
                     if(isset($_SESSION['id'])) {
-                        echo '<a href="logout.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Logout</a>';
+                        echo '<a href="logout.php" class="text-sm text-blue-600 dark:text-blue-500 hover:underline">Edit Profile</a>';
+                        echo '<a href="logout.php" class="text-sm ml-3 text-blue-600 dark:text-blue-500 hover:underline">Logout</a>';
                     } else {
                         echo '<a href="login.php" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>';
                     }
