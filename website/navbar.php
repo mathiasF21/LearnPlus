@@ -56,6 +56,8 @@
                             if ($stmtT->rowCount() > 0) {
                                 echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
                                 $_SESSION['type'] = 'IN';
+                                $instructorData = $stmtT->fetch(PDO::FETCH_ASSOC);
+                                $_SESSION['years_exp'] = $instructorData['years_experience'];
                             } elseif ($stmtSt->rowCount() > 0) {
                                 $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['funds'] = $studentData['funds']; 
