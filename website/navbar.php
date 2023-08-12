@@ -55,9 +55,11 @@
                             
                             if ($stmtT->rowCount() > 0) {
                                 echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                                $_SESSION['type'] = 'IN';
                             } elseif ($stmtSt->rowCount() > 0) {
                                 $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['funds'] = $studentData['funds']; 
+                                $_SESSION['type'] = 'ST';
                                 echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Delist/Enroll</a>';
                             }
                         }
