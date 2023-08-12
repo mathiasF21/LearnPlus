@@ -1,6 +1,7 @@
 <?php
     include 'navbar.php' ;
     $_SESSION['category_id'] = 1;
+    $_SESSION['mycourses'] = false;
 ?>
 <title>Science</title>
 <div>

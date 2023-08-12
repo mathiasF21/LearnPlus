@@ -34,10 +34,14 @@
                 $stmt->execute(array(
                     ':id' => $userId));
             } else {
-                $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
+                $error_message = "Please select a valid option from the dropdown.";
             }
             session_start();
             $_SESSION['user_id'] = $userId;
+            $_SESSION['first_name'] = $_POST['first_name'];
+            $_SESSION['last_name'] = $_POST['last_name'];
+            $_SESSION['members'] = $_POST['members'];
+            $_SESSION['email'] = $_POST['email'];
             header("Location: home.php");
             exit();
         }
@@ -50,9 +54,7 @@
         }
 ?>
 <title>Sign Up</title>
-<div class="error-message">
-  <?php echo isset($_POST['errorMessage']) ? $_POST['errorMessage'] : ''; ?>
-</div>
+<?php include 'errorMessage.php'?>
 <section class="bg-blue-800 my-44">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">

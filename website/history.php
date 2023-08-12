@@ -1,6 +1,7 @@
 <?php
     include 'navbar.php' ;
     $_SESSION['category_id'] = 4;
+    $_SESSION['mycourses'] = false;
 ?>
 <title>History</title>
 <div>

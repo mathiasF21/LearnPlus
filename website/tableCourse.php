@@ -27,9 +27,26 @@
         </thead>
         <?php
             echo '<tbody class="text-center">';
-            $stmt = $pdo->prepare("SELECT id, id_instructor, description, name, start_time, end_time, max_capacity, cost FROM Course WHERE id_category = :id_category");
-            $stmt->bindParam(':id_category', $_SESSION['category_id'], PDO::PARAM_INT);
-            $stmt->execute();
+            if ($_SESSION['mycourses']) {
+                $sqlSearch = "SELECT id_course FROM inscription WHERE id_student = :id_student";
+                $stmtInscription = $pdo->prepare($sqlSearch);
+                $stmtInscription->bindParam(':id_student', $user_id, PDO::PARAM_INT);
+                $stmtInscription->execute();
+
+                $idCourses = $stmtInscription->fetchAll(PDO::FETCH_COLUMN);
+
+                $inClause = implode(',', array_fill(0, count($idCourses), '?'));
+
+                $stmt = $pdo->prepare("SELECT id, id_instructor, description, name, start_time, end_time, max_capacity, cost FROM Course WHERE id IN ($inClause)");
+                foreach ($idCourses as $index => $id) {
+                    $stmt->bindValue($index + 1, $id, PDO::PARAM_INT);
+                }
+                $stmt->execute();                
+            } else {
+                $stmt = $pdo->prepare("SELECT id, id_instructor, description, name, start_time, end_time, max_capacity, cost FROM Course WHERE id_category = :id_category");
+                $stmt->bindParam(':id_category', $_SESSION['category_id'], PDO::PARAM_INT);
+                $stmt->execute();
+            }
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $instructorSql = 'SELECT first_name,last_name FROM users WHERE id = :id';
