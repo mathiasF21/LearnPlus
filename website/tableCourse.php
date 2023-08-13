@@ -42,6 +42,10 @@
                     $stmt->bindValue($index + 1, $id, PDO::PARAM_INT);
                 }
                 $stmt->execute();                
+            } elseif($_SESSION['type'] ==='IN') {
+                $stmt = $pdo->prepare("SELECT id, id_instructor, description, name, start_time, end_time, max_capacity, cost FROM Course WHERE id_instructor = :id_instructor");
+                $stmt->bindParam(':id_instructor', $_SESSION['id'], PDO::PARAM_INT);
+                $stmt->execute();
             } else {
                 $stmt = $pdo->prepare("SELECT id, id_instructor, description, name, start_time, end_time, max_capacity, cost FROM Course WHERE id_category = :id_category");
                 $stmt->bindParam(':id_category', $_SESSION['category_id'], PDO::PARAM_INT);
