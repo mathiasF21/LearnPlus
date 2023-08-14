@@ -1,7 +1,7 @@
 <?php
     include 'pdo-conn.php';
     include 'navbar.php';
-    $_SESSION['mycourses'] = false;
+    $_SESSION['courses_created'] = true;
     try {
         if (isset($_POST['course_name']) && isset($_POST['course_desc']) 
         && isset($_POST['max-cap']) && isset($_POST['start-time']) 
