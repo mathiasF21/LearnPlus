@@ -1,22 +1,30 @@
 <?php 
     include 'navbar.php';
     try {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_grade']) && isset($_POST['student_id'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_grade']) && isset($_POST['student_id']) && isset($_POST['id_course'])) {
             $new_grade = $_POST['new_grade'];
             $student_id = $_POST['student_id'];
-    
-            $sql = "UPDATE inscription SET grade = :new_grade WHERE id_student = :id_student";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(array(
-                ':id_student' => $student_id,
-                ':new_grade' => $new_grade
-            ));
+            $course_id = $_POST['id_course'];
+
+            if($new_grade < 0) {
+                $error_message = 'The new grade cannot be a negative number.';
+            } else {
+                $sql = "UPDATE inscription SET grade = :new_grade WHERE id_student = :id_student AND id_course = :id_course";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute(array(
+                    ':id_student' => $student_id,
+                    ':new_grade' => $new_grade,
+                    ':id_course' => $course_id
+                ));
+            }
         }
     } catch(PDOException $err) {
         echo "Exception message: " . $err->getMessage();
         exit();
     }
 ?>
+<title>My students</title>
+<?php include 'errorMessage.php'?>
 <h1 class="mx-5 relative my-4 text-center z-10 text-4xl font-bold tracking-tight text-white sm:text-4xl"><span class="underline decoration-red-600">My students</span></h1>
 <div class="w-11/12 mx-auto relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -56,6 +64,7 @@
                     echo '<td class="px-6 py-4">';
                     echo '<form method="POST">';
                     echo '<input type="hidden" name="student_id" value=' . $row['id'] . '>';
+                    echo '<input type="hidden" name="id_course" value=' . $row['id_course'] . '>';
                     echo '<input type="number" name="new_grade" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required step="0.01">';
                     echo '</td>';
                     echo '<td class="px-6 py-4 text-right">';
