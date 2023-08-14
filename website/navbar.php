@@ -52,17 +52,24 @@
                             $stmtT = $pdo->prepare($instructorSql);
                             $stmtT ->bindParam(':id', $user_id, PDO::PARAM_INT);
                             $stmtT ->execute();
+
+                            $_SESSION['courses_created'] = false;
+                            $_SESSION['mycourses'] = false;
                             
                             if ($stmtT->rowCount() > 0) {
                                 echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                                echo '<a href="myStudents.php" class="text-white dark:text-white hover:underline">My students</a>';
                                 $_SESSION['type'] = 'IN';
                                 $instructorData = $stmtT->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['years_exp'] = $instructorData['years_experience'];
+                                $_SESSION['courses_created'] = false;
                             } elseif ($stmtSt->rowCount() > 0) {
                                 $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['funds'] = $studentData['funds']; 
                                 $_SESSION['type'] = 'ST';
+                                $_SESSION['mycourses'] = false;
                                 echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Delist/Enroll</a>';
+                                echo '<a href="myGrades.php" class="text-white dark:text-white hover:underline">My grades</a>';
                             }
                         }
                     ?>
