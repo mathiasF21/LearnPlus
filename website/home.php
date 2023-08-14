@@ -27,6 +27,7 @@
                     $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                     $_SESSION['funds'] = $studentData['funds']; 
                     echo '<a href="enrollCourse.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Enroll in a course</a>';
+                    echo '<a href="gold.php" class="rounded-md bg-yellow-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Become GOLD!</a>';
                 } elseif($stmtT->rowCount() > 0) {
                     echo '<a href="insertCourse.php" class="rounded-md bg-red-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create a course</a>';
                 }

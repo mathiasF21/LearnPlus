@@ -1,6 +1,8 @@
 <?php
     require_once('base.php');
     session_start();
+    $_SESSION['courses_created'] = false;
+    $_SESSION['mycourses'] = false;
 ?>
 <body class="bg-blue-800">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -52,9 +54,6 @@
                             $stmtT = $pdo->prepare($instructorSql);
                             $stmtT ->bindParam(':id', $user_id, PDO::PARAM_INT);
                             $stmtT ->execute();
-
-                            $_SESSION['courses_created'] = false;
-                            $_SESSION['mycourses'] = false;
                             
                             if ($stmtT->rowCount() > 0) {
                                 echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
