@@ -17,8 +17,13 @@
             if ($stmtCourse->rowCount() > 0) {
                 $course = $stmtCourse->fetch(PDO::FETCH_ASSOC);
                 $id_instructor = $course['id_instructor'];
-                $cost = $course['cost'];
-
+                
+                if($_SESSION['status'] === 'gold') {
+                    $cost = $course['cost'] * 0.9;
+                } else {
+                    $cost = $course['cost'];
+                }
+                
                 if($optionSelected === 'EN') {
                     if ($cost <= $funds) {
                         $sqlInsert = "INSERT INTO inscription (id_student, id_course, id_instructor) VALUES (:id_student, :id_course, :id_instructor)";
