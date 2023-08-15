@@ -33,6 +33,7 @@
                     $stmt->execute(['years_experience' => $years_experience, 'id' => $_SESSION['id']]);
                     $_SESSION['years_exp'] = $_POST['years_exp'];
                 }
+                $success_message = "Profile updated successfully!";
             } else {
                 $error_message = "One input is null.";
             }
@@ -45,6 +46,7 @@
 ?>
 <title>Edit profile</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
 <div class="w-full bg-white mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div class="my-8 space-y-4 md:space-y-6 sm:p-4"> 
         <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

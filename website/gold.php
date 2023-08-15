@@ -17,6 +17,7 @@
                 $pdo->commit(); 
 
                 $_SESSION['status'] = 'gold';
+                $success_message = "Thank you! Your are now GOLD.";
             }
         }
     } catch (PDOException $err) {
@@ -27,6 +28,7 @@
 ?>
 <title>Gold membership</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
 <body class="flex justify-center items-center h-screen bg-gray-100">
   <div class="text-center my-20">
     <h1 class="text-white text-5xl font-extrabold dark:text-white">LearnPlus<span class="bg-blue-100 bg-yellow-600 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">GOLD</span></h1>

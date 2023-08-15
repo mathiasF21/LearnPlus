@@ -16,8 +16,7 @@
                 $stmt->execute(['password' => $hashedPassword, 'email' => $email]);
 
                 if($stmt->rowCount() > 0) {
-                    header("Location: changePassword.php");
-                    exit();
+                    $success_message = "Password changed successfully!";
                 } else {
                     $error_message = 'Email not found';
                 }
@@ -34,6 +33,7 @@
 <title>Password Change</title>
 <section class="bg-blue-800">
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
         <img class="w-8 h-8 mr-2" src="./svgs/mortarboard.svg" alt="logo">

@@ -41,6 +41,8 @@
                         $new_funds = $funds - $cost;
                         $stmtUpdate = $pdo->prepare($sqlUpdate);
                         $stmtUpdate->execute([':new_funds' => $new_funds, 'id' => $user_id]);
+
+                        $success_message = "Enrolled in successfully!"; 
     
                         $_SESSION['funds'] = $new_funds;
                     } else {
@@ -67,6 +69,8 @@
                             ':refund' => $cost,
                             ':id_student' => $user_id
                         ));
+
+                        $success_message = "Delisted from the course successfully!";
                     } else {
                         $error_message = "You are not in this course";
                     }
@@ -83,6 +87,7 @@
 ?>
 <title>Course Conclusion</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
 <div class="w-full bg-white mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div class="my-8 space-y-4 md:space-y-6 sm:p-4"> 
         <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

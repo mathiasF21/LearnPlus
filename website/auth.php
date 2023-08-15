@@ -7,43 +7,53 @@
         {
             $password = $_POST['password'];
             $confirmPassword = $_POST['confirm-password'];
+            $email = $_POST['email'];
+
+            $emailCheckSql = "SELECT COUNT(*) FROM users WHERE email = :email";
+            $emailCheckStmt = $pdo->prepare($emailCheckSql);
+            $emailCheckStmt->execute(['email' => $email]);
+            $emailExists = $emailCheckStmt->fetchColumn();
+
             if ($password !== $confirmPassword) {
-                $_POST['errorMessage'] = "Passwords do not match!";
-                header("Location: auth.php");
+                $error_message = "Passwords do not match!";
+            } elseif($emailExists) {
+                $error_message = "An account with this email already exists.";
+            } else {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute(array(
+                    ':first_name' => $_POST['first_name'],
+                    ':last_name' => $_POST['last_name'],
+                    ':email' => $_POST['email'],
+                    ':password' => $hashedPassword
+                ));
+
+                $selectionOption = $_POST['members'];
+                $userId = $pdo->lastInsertId();
+
+                if($selectionOption === 'ST') {
+                    $sql = "INSERT INTO student (id) VALUES (:id)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(array(
+                        ':id' => $userId));
+                } elseif($selectionOption === 'IN') {
+                    $sql = "INSERT INTO instructor (id) VALUES (:id)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(array(
+                        ':id' => $userId));
+                } else {
+                    $error_message = "Please select a valid option from the dropdown.";
+                }
+                session_start();
+                $_SESSION['id'] = $userId;
+                $_SESSION['first_name'] = $_POST['first_name'];
+                $_SESSION['last_name'] = $_POST['last_name'];
+                $_SESSION['type'] = $_POST['members'];
+                $_SESSION['email'] = $_POST['email'];
+                header("Location: home.php");
                 exit();
             }
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(array(
-                ':first_name' => $_POST['first_name'],
-                ':last_name' => $_POST['last_name'],
-                ':email' => $_POST['email'],
-                ':password' => $hashedPassword
-            ));
-            $selectionOption = $_POST['members'];
-            $userId = $pdo->lastInsertId();
-            if($selectionOption === 'ST') {
-                $sql = "INSERT INTO student (id) VALUES (:id)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute(array(
-                    ':id' => $userId));
-            } elseif($selectionOption === 'IN') {
-                $sql = "INSERT INTO instructor (id) VALUES (:id)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute(array(
-                    ':id' => $userId));
-            } else {
-                $error_message = "Please select a valid option from the dropdown.";
-            }
-            session_start();
-            $_SESSION['user_id'] = $userId;
-            $_SESSION['first_name'] = $_POST['first_name'];
-            $_SESSION['last_name'] = $_POST['last_name'];
-            $_SESSION['members'] = $_POST['members'];
-            $_SESSION['email'] = $_POST['email'];
-            header("Location: home.php");
-            exit();
         }
         include 'navbar.php' ;
 
