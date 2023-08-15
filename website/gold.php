@@ -2,11 +2,22 @@
     include 'navbar.php';
     try {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $pdo->beginTransaction(); 
-            $sql = "UPDATE student SET status = 'gold' WHERE id = :id";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(['id' => $_SESSION['id']]);
-            $pdo->commit(); 
+
+            if($_SESSION['status'] === 'gold'){
+                $error_message = 'You already are a GOLD member.';
+            } elseif($_SESSION['funds'] < 200) {
+                $error_message = 'You do not have enough funds to buy GOLD.';
+            } else {
+                $pdo->beginTransaction(); 
+                $newFunds = $_SESSION['funds'] - 200;
+
+                $sql = "UPDATE student SET status = 'gold', funds = :newFunds WHERE id = :id";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute(['newFunds' => $newFunds, 'id' => $_SESSION['id']]);
+                $pdo->commit(); 
+
+                $_SESSION['status'] = 'gold';
+            }
         }
     } catch (PDOException $err) {
         $pdo->rollBack(); 
@@ -14,8 +25,10 @@
         exit();
     }
 ?>
+<title>Gold membership</title>
+<?php include 'errorMessage.php'?>
 <body class="flex justify-center items-center h-screen bg-gray-100">
-  <div class="text-center">
+  <div class="text-center my-20">
     <h1 class="text-white text-5xl font-extrabold dark:text-white">LearnPlus<span class="bg-blue-100 bg-yellow-600 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">GOLD</span></h1>
     <p class="mb-10 my-4 text-gray-100 dark:text-gray-400">
         LearnPlus Gold subscription offers an exceptional value proposition with its 10% 

@@ -74,7 +74,15 @@
                 echo $row['max_capacity'];
                 echo '</td>';
                 echo '<td class="px-6 py-4">';
-                echo $row['cost'] . ' CAD';
+                if ($_SESSION['type'] === 'ST') {
+                    if($_SESSION['status'] === 'gold') {
+                        $originalCost = $row['cost'];
+                        $discountedCost = $originalCost * 0.9; 
+                        echo $discountedCost . ' CAD';
+                    }
+                } else {
+                    echo $row['cost'] . ' CAD';
+                }
                 echo '</td>';
                 echo '<td class="px-6 py-4">';
                 echo $row['id'];

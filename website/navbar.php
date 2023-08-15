@@ -67,6 +67,7 @@
                                 $_SESSION['funds'] = $studentData['funds']; 
                                 $_SESSION['type'] = 'ST';
                                 $_SESSION['mycourses'] = false;
+                                $_SESSION['status'] = $studentData['status'];
                                 echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Delist/Enroll</a>';
                                 echo '<a href="myGrades.php" class="text-white dark:text-white hover:underline">My grades</a>';
                             }
