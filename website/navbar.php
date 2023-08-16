@@ -56,7 +56,7 @@
                             $stmtT ->execute();
                             
                             if ($stmtT->rowCount() > 0) {
-                                echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                                echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert/Delete Course</a>';
                                 echo '<a href="myStudents.php" class="text-white dark:text-white hover:underline">My students</a>';
                                 $_SESSION['type'] = 'IN';
                                 $instructorData = $stmtT->fetch(PDO::FETCH_ASSOC);

@@ -16,6 +16,7 @@
                     ':new_grade' => $new_grade,
                     ':id_course' => $course_id
                 ));
+                $success_message = 'Grades changed successfully.';
             }
         }
     } catch(PDOException $err) {
@@ -25,8 +26,9 @@
 ?>
 <title>My students</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
 <h1 class="mx-5 relative my-4 text-center z-10 text-4xl font-bold tracking-tight text-white sm:text-4xl"><span class="underline decoration-red-600">My students</span></h1>
-<div class="w-11/12 mx-auto relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="w-11/12 mb-4 mx-auto relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

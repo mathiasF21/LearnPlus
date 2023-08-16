@@ -42,7 +42,40 @@
                 ':max_capacity' => $max_capacity,
                 'cost' => $course_cost
             ));
-        } 
+            $success_message = "Course created!";
+        } elseif(isset($_POST['id_course']) && isset($_POST['price'])) {
+
+            $id_course = $_POST['id_course'];
+            $price = $_POST['price'];
+
+            // Deleting the course
+            $delete_course_sql = "DELETE FROM Course WHERE id = :id_course";
+            $delete_course_stmt = $pdo->prepare($delete_course_sql);
+            $delete_course_stmt->bindParam(':id_course', $id_course, PDO::PARAM_INT);
+            $delete_course_stmt->execute();
+
+            // Selecting student IDs
+            $select_student_ids_sql = "SELECT id_student FROM Inscription WHERE id_course = :course_id";
+            $select_student_ids_stmt = $pdo->prepare($select_student_ids_sql);
+            $select_student_ids_stmt->bindParam(':course_id', $id_course, PDO::PARAM_INT);
+            $select_student_ids_stmt->execute();
+            $student_ids = $select_student_ids_stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            // Updating student funds
+            foreach($student_ids as $student_id) {
+                $update_student_funds_sql = "UPDATE student SET funds = funds + :price WHERE id = :student_id";
+                $update_student_funds_stmt = $pdo->prepare($update_student_funds_sql);
+                $update_student_funds_stmt->bindParam(':price', $price, PDO::PARAM_INT); 
+                $update_student_funds_stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT); 
+                $update_student_funds_stmt->execute();
+            }
+
+            // Deleting course inscriptions
+            $delete_inscriptions_sql = "DELETE FROM Inscription WHERE id_course = :id_course";
+            $delete_inscriptions_stmt = $pdo->prepare($delete_inscriptions_sql);
+            $delete_inscriptions_stmt->bindParam(':id_course', $id_course, PDO::PARAM_INT);
+            $delete_inscriptions_stmt->execute();
+        }
     } catch(PDOException $err) {
         $pdo->rollBack();
         echo "Exception message: " . $err->getMessage();
@@ -51,6 +84,8 @@
 ?>
 <title>Insert a course</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
+
 <div class="mx-auto w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div class="my-7 p-6 space-y-4 md:space-y-6 sm:p-8">
     <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
