@@ -25,15 +25,20 @@
                         $stmtUpdate = $pdo->prepare($sqlUpdate);
                         $stmtUpdate->execute([':new_funds' => $new_funds_total, 'id' => $_SESSION['id']]);
                         $_SESSION['funds'] = $new_funds_total;
+                        $success_message = "Profile updated successfully!";
                     }
                 } elseif (isset($_POST['years_exp'])) {
                     $years_experience = $_POST['years_exp'];
-                    $sql = "UPDATE instructor SET years_experience = :years_experience WHERE id = :id";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->execute(['years_experience' => $years_experience, 'id' => $_SESSION['id']]);
-                    $_SESSION['years_exp'] = $_POST['years_exp'];
+                    if($years_experience < 0) {
+                        $error_message = "Years of experience cannot be a negative number.";
+                    } else {
+                        $sql = "UPDATE instructor SET years_experience = :years_experience WHERE id = :id";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute(['years_experience' => $years_experience, 'id' => $_SESSION['id']]);
+                        $_SESSION['years_exp'] = $_POST['years_exp'];
+                        $success_message = "Profile updated successfully!";
+                    }
                 }
-                $success_message = "Profile updated successfully!";
             } else {
                 $error_message = "One input is null.";
             }

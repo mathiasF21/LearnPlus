@@ -13,8 +13,16 @@
             $stmtCourse = $pdo->prepare($sql); 
             $stmtCourse->bindParam(':course_id', $course_id, PDO::PARAM_INT);
             $stmtCourse->execute();
-            
-            if ($stmtCourse->rowCount() > 0) {
+
+            $sql = 'SELECT * FROM Inscription WHERE id_course = :id_course AND id_student = :id_student';
+            $stmtCheck = $pdo->prepare($sql);
+            $stmtCheck->bindParam(':id_course', $course_id, PDO::PARAM_INT);
+            $stmtCheck->bindParam(':id_student', $user_id, PDO::PARAM_INT);
+            $stmtCheck->execute();
+
+            if($stmtCheck->rowCount() > 0 && $optionSelected === 'EN') {
+                $error_message = "You are already enrolled in this course.";
+            } elseif ($stmtCourse->rowCount() > 0) {
                 $course = $stmtCourse->fetch(PDO::FETCH_ASSOC);
                 $id_instructor = $course['id_instructor'];
                 
