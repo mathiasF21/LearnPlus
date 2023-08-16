@@ -75,20 +75,23 @@
                     echo $row['max_capacity'];
                     echo '</td>';
                     echo '<td class="px-6 py-4">';
-                    if ($_SESSION['type'] === 'ST') {
-                        if($_SESSION['status'] === 'gold') {
-                            $originalCost = $row['cost'];
-                            $discountedCost = $originalCost * 0.9; 
-                            echo $discountedCost . ' CAD';
-                        } else {
-                            echo $row['cost'] . ' CAD';
-                        }
+                    if (isset($_SESSION['type']) && $_SESSION['type'] === 'ST' && $_SESSION['status'] === 'gold') {
+                        $discountedCost = $row['cost'] * 0.9;
+                        echo $discountedCost . ' CAD';
                     } else {
                         echo $row['cost'] . ' CAD';
                     }
                     echo '</td>';
                     echo '<td class="px-6 py-4">';
-                    echo $row['id'];
+                    if ($_SESSION['courses_created']) {
+                        echo '<form method="POST">';
+                        echo '<input type="hidden" name="price" id="price" value="' . $row['cost'] . '">';
+                        echo '<input type="hidden" name="id_course" id="id_course" value="' . $row['id'] . '">';
+                        echo '<button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Delete</button>';
+                        echo '</form>';
+                    } else {
+                        echo $row['id'];
+                    }
                     echo '</td>';
                     echo '<td class="px-6 py-4 text-right">';
                     echo '<a href="description.php?course_id=' . $row['id'] . '" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View description</a>';
