@@ -9,3 +9,19 @@
   •	Instructors can create or delete courses and grade their students. Learners must pay to enroll in (can also delist).
 # Stack
   1-PHP 2-MySql 3-CSS(talwind) 4-HTML
+# An Inside Look
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/a294c6bb-412e-4de5-b0c1-29dc9ee97b89)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/2cd74c1e-a9ef-4f4d-8e53-44b5957e3cf5)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/03317f70-891a-4dfb-8440-d4d4936e4fe3)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/a7e91d61-c363-4edf-8b8b-8890441b95f6)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/3f047483-3057-4dee-ba37-c5828ce71342)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/fa60fda8-20e0-4c35-9978-e7d189938a4d)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/ed3cb783-d663-47ba-8d04-183620d87506)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/7ece943e-5107-426d-a26a-0a3a5d7afb3c)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/ad0d6593-77a6-4c76-b9b0-ef2df1cab30c)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/b916538c-af0f-496c-aa72-fe9c2beeb477)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/6367599c-6402-4c2c-9b3a-dbd25da1a25f)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/f936ed40-eade-4dd2-a8a9-8df34d0e42f6)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/9375ea4a-1352-4c40-9ed1-5ae554022fac)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/70ec3f4e-d0a4-40c6-882f-58fd5dac64bd)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/2bfc6c31-853a-4715-8325-0afc4d750add)
