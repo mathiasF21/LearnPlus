@@ -17,8 +17,9 @@
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/3f047483-3057-4dee-ba37-c5828ce71342)
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/fa60fda8-20e0-4c35-9978-e7d189938a4d)
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/ed3cb783-d663-47ba-8d04-183620d87506)
-![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/7ece943e-5107-426d-a26a-0a3a5d7afb3c)
-![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/ad0d6593-77a6-4c76-b9b0-ef2df1cab30c)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/4adfdc83-ed29-4448-bb36-afc7f6bdd514)
+![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/8179b10e-8e6d-4bfb-9cdb-08d2a0b61c22)
+
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/b916538c-af0f-496c-aa72-fe9c2beeb477)
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/6367599c-6402-4c2c-9b3a-dbd25da1a25f)
 ![image](https://github.com/mathiasF21/LearnPlus/assets/107279216/f936ed40-eade-4dd2-a8a9-8df34d0e42f6)
