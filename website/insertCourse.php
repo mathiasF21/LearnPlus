@@ -30,13 +30,10 @@
                 header("Location insertCourse.php");
             }
 
-            $sqlSearch = "SELECT * FROM course WHERE id_instructor = :id_instructor AND name = :name";
-            $stmtInscription = $pdo->prepare($sqlSearch);
-            $stmtInscription->bindParam(':id_instructor', $_SESSION['id'], PDO::PARAM_INT);
-            $stmtInscription->bindParam(':name', $course_name, PDO::PARAM_INT);
-            $stmtInscription->execute();
-
-            if($stmtInscription->rowCount() > 0) {
+            $stmt = $pdo->prepare("SELECT * FROM course WHERE id_instructor = :id AND name = :course_name");
+            $stmt->execute(['id' => $_SESSION['id'], 'course_name' => $course_name]);
+            
+            if ($stmt->rowCount() > 0) {
                 $error_message = "You have already created a course with this name.";
             } else {
                 $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity, cost) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity, :cost)";

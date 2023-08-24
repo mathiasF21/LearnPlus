@@ -33,7 +33,7 @@
   <div class="text-center my-20">
     <h1 class="text-white text-5xl font-extrabold dark:text-white">LearnPlus<span class="bg-blue-100 bg-yellow-600 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">GOLD</span></h1>
     <p class="mb-10 my-4 text-gray-100 dark:text-gray-400">
-        LearnPlus Gold subscription offers an exceptional value proposition with its 10% 
+        LearnPlus Gold (200 CAD) subscription offers an exceptional value proposition with its 10% 
         discount on every course. This generous discount empowers subscribers to enjoy 
         significant savings while exploring a diverse range of courses, making continuous 
         learning more affordable and accessible. Whether delving into new subjects or deepening 
