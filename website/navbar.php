@@ -1,6 +1,8 @@
 <?php
     require_once('base.php');
     session_start();
+    $_SESSION['courses_created'] = false;
+    $_SESSION['mycourses'] = false;
 ?>
 <body class="bg-blue-800">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -54,11 +56,20 @@
                             $stmtT ->execute();
                             
                             if ($stmtT->rowCount() > 0) {
-                                echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert Course</a>';
+                                echo '<a href="./insertCourse.php" class="text-white dark:text-white hover:underline">Insert/Delete Course</a>';
+                                echo '<a href="myStudents.php" class="text-white dark:text-white hover:underline">My students</a>';
+                                $_SESSION['type'] = 'IN';
+                                $instructorData = $stmtT->fetch(PDO::FETCH_ASSOC);
+                                $_SESSION['years_exp'] = $instructorData['years_experience'];
+                                $_SESSION['courses_created'] = false;
                             } elseif ($stmtSt->rowCount() > 0) {
                                 $studentData = $stmtSt->fetch(PDO::FETCH_ASSOC);
                                 $_SESSION['funds'] = $studentData['funds']; 
+                                $_SESSION['type'] = 'ST';
+                                $_SESSION['mycourses'] = false;
+                                $_SESSION['status'] = $studentData['status'];
                                 echo '<a href="enrollCourse.php" class="text-white dark:text-white hover:underline">Delist/Enroll</a>';
+                                echo '<a href="myGrades.php" class="text-white dark:text-white hover:underline">My grades</a>';
                             }
                         }
                     ?>

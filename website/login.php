@@ -20,8 +20,7 @@
                 header("Location: home.php");
                 exit();
             } else {
-                header("Location: login.php?error=Incorrect User name or password");
-                exit();
+                $error_message = 'Incorrect email, password or user not found.';
             }
         }
     } catch( PDOException $err) {

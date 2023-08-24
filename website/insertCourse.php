@@ -1,6 +1,7 @@
 <?php
     include 'pdo-conn.php';
     include 'navbar.php';
+    $_SESSION['courses_created'] = true;
     try {
         if (isset($_POST['course_name']) && isset($_POST['course_desc']) 
         && isset($_POST['max-cap']) && isset($_POST['start-time']) 
@@ -16,6 +17,19 @@
             $end_time = $_POST['end-time'];
             $course_cost = $_POST['cost'];
 
+            if ($course_choice === 'SC') {
+                $category_id = 1;
+            } elseif ($course_choice === 'MT') {
+                $category_id = 2;
+            } elseif ($course_choice === 'HS') {
+                $category_id = 4;
+            } elseif ($course_choice === 'EN') {
+                $category_id = 3;
+            } else {
+                $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
+                header("Location insertCourse.php");
+            }
+
             $sqlSearch = "SELECT * FROM course WHERE id_instructor = :id_instructor AND name = :name";
             $stmtInscription = $pdo->prepare($sqlSearch);
             $stmtInscription->bindParam(':id_instructor', $_SESSION['id'], PDO::PARAM_INT);
@@ -25,19 +39,6 @@
             if($stmtInscription->rowCount() > 0) {
                 $error_message = "You have already created a course with this name.";
             } else {
-                if ($course_choice === 'SC') {
-                    $category_id = 1;
-                } elseif ($course_choice === 'MT') {
-                    $category_id = 2;
-                } elseif ($course_choice === 'HS') {
-                    $category_id = 4;
-                } elseif ($course_choice === 'EN') {
-                    $category_id = 3;
-                } else {
-                    $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
-                    header("Location insertCourse.php");
-                }
-    
                 $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity, cost) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity, :cost)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(array(
@@ -49,9 +50,42 @@
                     ':end_time' => $end_time,
                     ':max_capacity' => $max_capacity,
                     'cost' => $course_cost
-                ));
+            ));
+            $success_message = "Course created!";
             }
-        } 
+        } elseif(isset($_POST['id_course']) && isset($_POST['price'])) {
+
+            $id_course = $_POST['id_course'];
+            $price = $_POST['price'];
+
+            // Deleting the course
+            $delete_course_sql = "DELETE FROM Course WHERE id = :id_course";
+            $delete_course_stmt = $pdo->prepare($delete_course_sql);
+            $delete_course_stmt->bindParam(':id_course', $id_course, PDO::PARAM_INT);
+            $delete_course_stmt->execute();
+
+            // Selecting student IDs
+            $select_student_ids_sql = "SELECT id_student FROM Inscription WHERE id_course = :course_id";
+            $select_student_ids_stmt = $pdo->prepare($select_student_ids_sql);
+            $select_student_ids_stmt->bindParam(':course_id', $id_course, PDO::PARAM_INT);
+            $select_student_ids_stmt->execute();
+            $student_ids = $select_student_ids_stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            // Updating student funds
+            foreach($student_ids as $student_id) {
+                $update_student_funds_sql = "UPDATE student SET funds = funds + :price WHERE id = :student_id";
+                $update_student_funds_stmt = $pdo->prepare($update_student_funds_sql);
+                $update_student_funds_stmt->bindParam(':price', $price, PDO::PARAM_INT); 
+                $update_student_funds_stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT); 
+                $update_student_funds_stmt->execute();
+            }
+
+            // Deleting course inscriptions
+            $delete_inscriptions_sql = "DELETE FROM Inscription WHERE id_course = :id_course";
+            $delete_inscriptions_stmt = $pdo->prepare($delete_inscriptions_sql);
+            $delete_inscriptions_stmt->bindParam(':id_course', $id_course, PDO::PARAM_INT);
+            $delete_inscriptions_stmt->execute();
+        }
     } catch(PDOException $err) {
         $pdo->rollBack();
         echo "Exception message: " . $err->getMessage();
@@ -60,6 +94,8 @@
 ?>
 <title>Insert a course</title>
 <?php include 'errorMessage.php'?>
+<?php include 'successMessage.php'?>
+
 <div class="mx-auto w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div class="my-7 p-6 space-y-4 md:space-y-6 sm:p-8">
     <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -103,4 +139,6 @@
         </form>
     </div>
 </div>
+<h1 class="mx-5 relative my-4 text-center z-10 text-4xl font-bold tracking-tight text-white sm:text-4xl"><span class="underline decoration-red-600">Created courses</span></h1>';
+<?php include 'tableCourse.php'?>
 <?php include 'footer.php';?>
