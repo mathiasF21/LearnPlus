@@ -16,31 +16,41 @@
             $end_time = $_POST['end-time'];
             $course_cost = $_POST['cost'];
 
-            if ($course_choice === 'SC') {
-                $category_id = 1;
-            } elseif ($course_choice === 'MT') {
-                $category_id = 2;
-            } elseif ($course_choice === 'HS') {
-                $category_id = 4;
-            } elseif ($course_choice === 'EN') {
-                $category_id = 3;
-            } else {
-                $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
-                header("Location insertCourse.php");
-            }
+            $sqlSearch = "SELECT * FROM course WHERE id_instructor = :id_instructor AND name = :name";
+            $stmtInscription = $pdo->prepare($sqlSearch);
+            $stmtInscription->bindParam(':id_instructor', $_SESSION['id'], PDO::PARAM_INT);
+            $stmtInscription->bindParam(':name', $course_name, PDO::PARAM_INT);
+            $stmtInscription->execute();
 
-            $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity, cost) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity, :cost)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(array(
-                ':id_instructor' => $_SESSION['id'],
-                ':id_category' => $category_id,
-                ':description' => $course_desc,
-                ':name' => $course_name,
-                ':start_time' => $start_time,
-                ':end_time' => $end_time,
-                ':max_capacity' => $max_capacity,
-                'cost' => $course_cost
-            ));
+            if($stmtInscription->rowCount() > 0) {
+                $error_message = "You have already created a course with this name.";
+            } else {
+                if ($course_choice === 'SC') {
+                    $category_id = 1;
+                } elseif ($course_choice === 'MT') {
+                    $category_id = 2;
+                } elseif ($course_choice === 'HS') {
+                    $category_id = 4;
+                } elseif ($course_choice === 'EN') {
+                    $category_id = 3;
+                } else {
+                    $_POST['errorMessage'] = "Please select a valid option from the dropdown.";
+                    header("Location insertCourse.php");
+                }
+    
+                $sql = "INSERT INTO course (id_instructor, id_category, description, name, start_time, end_time, max_capacity, cost) VALUES (:id_instructor, :id_category, :description, :name, :start_time, :end_time, :max_capacity, :cost)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute(array(
+                    ':id_instructor' => $_SESSION['id'],
+                    ':id_category' => $category_id,
+                    ':description' => $course_desc,
+                    ':name' => $course_name,
+                    ':start_time' => $start_time,
+                    ':end_time' => $end_time,
+                    ':max_capacity' => $max_capacity,
+                    'cost' => $course_cost
+                ));
+            }
         } 
     } catch(PDOException $err) {
         $pdo->rollBack();
